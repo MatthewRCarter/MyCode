@@ -1,0 +1,35 @@
+Every year, the National Basketball Association concludes its 82 game season with the playoffs-- And every year, we make our predictions: Who will come out as the year’s most dominant team?  Although there is a ranking system that matches a 1st seed to an 8th seed for each conference, huge upsets have become a regular occurrence, leading many to believe that simply relying on a teams regular season records and their seeding is not enough. What if there was a way in which regular season performance indicators and statistics could more accurately predict a teams playoff performance? 
+
+To dive into this problem, I compiled data from Kaggle that was made up of individual player data, historical team playoff performance, and a dataset containing a clutch statistic for each team over the years 2000-2018.
+
+When I completed our exploratory analysis of the data, I looked at a correlation matrix between all predictors and the quantitative equivalent of playoff performance. I also fit a regression with the variable selection method of mixed stepwise.
+ 
+ To try and more accurately determine which teams will be most successful in the NBA playoffs, I have applied 3 supervised statistical learning models: Quadratic Discriminant Analysis (QDA), K-Nearest Neighbors (KNN), and a Random Forest. With these methods I are most interested in prediction, as our goal is to create a model that would allow us to predict how teams will perform in the playoffs immediately following the end of the regular season. 
+ 
+For each of the three methods I experimented with three different train:train ratios to see how our results responded to changes in this variable. The three test/train ratios were as follows: 
+  ● Ratio #1 - 80% train 20% test 
+  ● Ratio #2 - 65% train 35% test 
+  ● Ratio #3 - 50% train 50% test 
+  
+
+Quadratic Discriminant Analysis (QDA): **70% Test Accuracy**
+ 
+  The dataset is relatively small, around 250 observations (a playoff series represents one observation), making our QDA extremely
+  sensitive to the dataset’s large numbers of predictors-- as a result, I was forced to use a reduced model (only the most significant
+  predictors). With this model, I acheieved test accuracy rate of 70% (in the RMD file, you can see the breakdown of classification
+  accuracy by class level)
+  
+  
+K-Nearest Neighbors (KNN):  **82.5% Test Accuracy**
+ 
+The next method I used was K-Nearest Neighbors. For each team that makes the playoffs, their average statistics tend to be very tightly grouped together. To help combat this, I standardized all values as to make our euclidean distances much more meaningful when using the KNN method.  
+ 
+There are several idiosyncrasies to note when analyzing the decisions made for a KNN model, the first of which was the size of the model. Obviously, KNN weights each variable equally when finding euclidean distance, which can be a detriment to the model when using a dataset that contains variables which do not have a strong correlation to the response variable. For this reason, I ran the KNN method on both the reduced and full version of our dataset
+
+The best KNN came using the reduced variable dataset, getting a test accuracy rate of 82.5%.
+
+Random Forest: **85% Test Accuracy**
+ 
+I was fairly excited to try fitting a random forest to this model. After cross-validation of train/test ratios and mtry, I was able to get a test accuracy rate of 85%! 
+
+ 
