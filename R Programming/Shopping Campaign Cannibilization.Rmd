@@ -1,0 +1,108 @@
+---
+title: "Shopping Campaign Cannibilization"
+author: "Matt Carter"
+date: "January 15, 2020"
+output: html_document
+keep_md: true
+---
+```{r}
+library(tidyverse)
+library(lubridate)
+```
+
+```{r}
+data <- readxl::read_xlsx("C:/Users/Matthew/Documents/Pet_Doors/scc.xlsx")
+
+relevant <- c("Shopping - Brand, Installation", "MMT - Shopping - General, Brand, Location")
+
+data <- data %>%
+  filter(campaign %in% relevant) %>%
+  select(-campaigt_type) %>%
+  mutate(week = week(day),
+         month = month(day),
+         year = year(day))
+```
+
+#analyzing devices by campaign
+```{r}
+shop1 <- data %>%
+  filter(campaign == "Shopping - Brand, Installation") %>%
+  group_by(device, day) %>%
+  summarise_at(vars(impressions, clicks, conversions, cost, conv_value), funs(sum))
+ggplot(shop1, aes(x = day, y = clicks, color = device)) + geom_point()  + geom_smooth() + ggtitle("Shopping - Brand, Installation - Clicks")
+
+shop2 <- data %>%
+  filter(campaign == "MMT - Shopping - General, Brand, Location") %>%
+  group_by(device, day) %>%
+  summarise_at(vars(impressions, clicks, conversions, cost, conv_value), funs(sum))
+ggplot(shop2, aes(x = day, y = clicks, color = device)) + geom_point()  + geom_smooth()  + ggtitle("MMT - Shopping - General, Brand, Location - Clicks")
+
+all_shop <- data %>%
+  group_by(device, day) %>%
+  summarise_at(vars(impressions, clicks, conversions, cost, conv_value), funs(sum))
+ggplot(all_shop, aes(x = day, y = clicks, color = device)) + geom_point()  + geom_smooth()  + ggtitle("Shopping Campaigns - Clicks")
+```
+
+#analyzing campaigns by device (daily)
+```{r}
+desktop <- data %>%
+  filter(device == "Desktop") %>%
+  group_by(campaign, day) %>%
+  summarise_at(vars(impressions, clicks, conversions, cost, conv_value), funs(sum))
+ggplot(desktop, aes(x = day, y = clicks, color = campaign)) + geom_point() + geom_smooth() + ggtitle("Desktop Clicks by Campaign")
+
+mobile <- data %>%
+  filter(device == "Mobile") %>%
+  group_by(campaign, day) %>%
+  summarise_at(vars(impressions, clicks, conversions, cost, conv_value), funs(sum))
+ggplot(mobile, aes(x = day, y = clicks, color = campaign)) + geom_point()  + geom_smooth() + ggtitle("Mobile Clicks by Campaign")
+
+tablet <- data %>%
+  filter(device == "Tablet") %>%
+  group_by(campaign, day) %>%
+  summarise_at(vars(impressions, clicks, conversions, cost, conv_value), funs(sum))
+ggplot(tablet, aes(x = day, y = clicks, color = campaign)) + geom_point() + geom_smooth() + ggtitle("Tablet Clicks by Campaign")
+```
+#analyzing campaigns by device (weekly)
+```{r}
+desktop1 <- data %>%
+  filter(device == "Desktop") %>%
+  group_by(campaign, week) %>%
+  summarise_at(vars(impressions, clicks, conversions, cost, conv_value), funs(sum))
+ggplot(desktop1, aes(x = week, y = clicks, color = campaign)) + geom_point() + geom_smooth() + ggtitle("Desktop Clicks by Campaign")
+
+mobile1 <- data %>%
+  filter(device == "Mobile") %>%
+  group_by(campaign, week) %>%
+  summarise_at(vars(impressions, clicks, conversions, cost, conv_value), funs(sum))
+ggplot(mobile1, aes(x = week, y = clicks, color = campaign)) + geom_point()  + geom_smooth() + ggtitle("Mobile Clicks by Campaign")
+
+tablet1 <- data %>%
+  filter(device == "Tablet") %>%
+  group_by(campaign, week) %>%
+  summarise_at(vars(impressions, clicks, conversions, cost, conv_value), funs(sum))
+ggplot(tablet1, aes(x = week, y = clicks, color = campaign)) + geom_point() + geom_smooth() + ggtitle("Tablet Clicks by Campaign")
+```
+
+
+```{r}
+click_spread <- readxl::read_xlsx("C:/Users/Matthew/Documents/Pet_Doors/shopping_click_spread.xlsx")
+
+click_spread <- click_spread %>%
+  mutate(hour_bin = case_when(HoD %in% c(23,0, 1, 2, 3) ~ "Early",
+                              HoD %in% c(4, 5, 6, 7,15, 16, 17, 18, 19, 20, 21, 22) ~ "Late",
+                              HoD %in% c(8, 9, 10, 11, 12, 13, 14) ~ "Midday"),
+         day_bin = case_when(DoW %in% c("Monday", "Tuesday", "Wednesday", "Thursday") ~ 'Weekday',
+                             DoW == "Friday" ~ "Friday",
+                             DoW %in% c("Saturday", "Sunday") ~ "Weekend"))
+
+click_spread <- click_spread %>%
+  group_by(hour_bin, day_bin, device) %>%
+  summarize_at(vars(impressions, clicks, conversions, conv_value, cost), funs(sum)) %>%
+  mutate(cpc = cost / clicks,
+         click_value = conv_value / clicks,
+         ACoS = cost / conv_value) %>%
+  arrange(desc(click_value))
+```
+
+
