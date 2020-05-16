@@ -1,10 +1,19 @@
-Every year, the National Basketball Association concludes its 82 game season with the playoffs-- And every year, we make our predictions: Who will come out as the year’s most dominant team?  Although there is a ranking system that matches a 1st seed to an 8th seed for each conference, huge upsets have become a regular occurrence, leading many to believe that simply relying on a teams regular season records and their seeding is not enough. What if there was a way in which regular season performance indicators and statistics could more accurately predict a teams playoff performance? 
+Every year, the National Basketball Association concludes its 82 game season with the playoffs-- And every year, we make our 
+predictions: Who will come out as the year’s most dominant team?  Although there is a ranking system that matches a 1st seed 
+to an 8th seed for each conference, huge upsets have become a regular occurrence, leading many to believe that simply relying 
+on a teams regular season records and their seeding is not enough. What if there was a way in which regular season performance 
+indicators and statistics could more accurately predict a teams playoff performance? 
 
-To dive into this problem, I compiled data from Kaggle that was made up of individual player data, historical team playoff performance, and a dataset containing a clutch statistic for each team over the years 2000-2018.
+To dive into this problem, I compiled data from Kaggle that was made up of individual player data, historical team playoff 
+performance, and a dataset containing a clutch statistic for each team over the years 2000-2018.
 
-When I completed our exploratory analysis of the data, I looked at a correlation matrix between all predictors and the quantitative equivalent of playoff performance. I also fit a regression with the variable selection method of mixed stepwise.
+When I completed our exploratory analysis of the data, I looked at a correlation matrix between all predictors and the 
+quantitative equivalent of playoff performance. I also fit a regression with the variable selection method of mixed stepwise.
  
-To try and more accurately determine which teams will be most successful in the NBA playoffs, I have applied 3 supervised statistical learning models: Quadratic Discriminant Analysis (QDA), K-Nearest Neighbors (KNN), and a Random Forest. With these methods I are most interested in prediction, as our goal is to create a model that would allow us to predict how teams will perform in the playoffs immediately following the end of the regular season. 
+To try and more accurately determine which teams will be most successful in the NBA playoffs, I have applied 3 supervised 
+statistical learning models: Quadratic Discriminant Analysis (QDA), K-Nearest Neighbors (KNN), and a Random Forest. With 
+these methods I are most interested in prediction, as our goal is to create a model that would allow us to predict how teams 
+will perform in the playoffs immediately following the end of the regular season. 
  
 For each of the three methods I experimented with three different train:train ratios to see how our results responded to changes in this variable. The three test/train ratios were as follows: 
   ● Ratio #1 - 80% train 20% test 
