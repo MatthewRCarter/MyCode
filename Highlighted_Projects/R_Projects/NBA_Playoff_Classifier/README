@@ -15,7 +15,9 @@ statistical learning models: Quadratic Discriminant Analysis (QDA), K-Nearest Ne
 these methods I are most interested in prediction, as our goal is to create a model that would allow us to predict how teams 
 will perform in the playoffs immediately following the end of the regular season. 
  
-For each of the three methods I experimented with three different train:train ratios to see how our results responded to changes in this variable. The three test/train ratios were as follows: 
+For each of the three methods I experimented with three different train:train ratios to see how our results responded to 
+changes in this variable. The three test/train ratios were as follows:
+ 
   ● Ratio #1 - 80% train 20% test 
   ● Ratio #2 - 65% train 35% test 
   ● Ratio #3 - 50% train 50% test 
