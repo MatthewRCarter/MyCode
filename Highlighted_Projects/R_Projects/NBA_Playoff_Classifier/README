@@ -22,14 +22,20 @@ Quadratic Discriminant Analysis (QDA): **70% Test Accuracy**
   
 K-Nearest Neighbors (KNN):  **82.5% Test Accuracy**
  
-The next method I used was K-Nearest Neighbors. For each team that makes the playoffs, their average statistics tend to be very tightly grouped together. To help combat this, I standardized all values as to make our euclidean distances much more meaningful when using the KNN method.  
- 
-There are several idiosyncrasies to note when analyzing the decisions made for a KNN model, the first of which was the size of the model. Obviously, KNN weights each variable equally when finding euclidean distance, which can be a detriment to the model when using a dataset that contains variables which do not have a strong correlation to the response variable. For this reason, I ran the KNN method on both the reduced and full version of our dataset
+  The next method I used was K-Nearest Neighbors. For each team that makes the playoffs, their average statistics tend to be very 
+  tightly grouped together. To help combat this, I standardized all values as to make our euclidean distances much more meaningful when
+  using the KNN method.  
 
-The best KNN came using the reduced variable dataset, getting a test accuracy rate of 82.5%.
+  There are several idiosyncrasies to note when analyzing the decisions made for a KNN model, the first of which was the size of the 
+  model. Obviously, KNN weights each variable equally when finding euclidean distance, which can be a detriment to the model when using
+  a dataset that contains variables which do not have a strong correlation to the response variable. For this reason, I ran the KNN 
+  method on both the reduced and full version of our dataset
+
+  The best KNN came using the reduced variable dataset, getting a test accuracy rate of 82.5%.
 
 Random Forest: **85% Test Accuracy**
  
-I was fairly excited to try fitting a random forest to this model. After cross-validation of train/test ratios and mtry, I was able to get a test accuracy rate of 85%! 
+  I was fairly excited to try fitting a random forest to this model. After cross-validation of train/test ratios and mtry, I was able to
+  get a test accuracy rate of 85%! 
 
  
