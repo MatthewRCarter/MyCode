@@ -1,1 +1,4 @@
-Using Python, PyCharm, and TensorFlow, I have set out to gain a mucher more solid understanding of solving problems utilizing Deep Learning. I am currently working on a deep CNN that transcribes pictures of full handwritten paragraphs and feeds the results into CopyLeaks API to return an originality score (plagarism checker). I have hopes to connect this with a web interface that allows you to upload a picture of handwritten text and get a Plagarism Score as a result (could be useful for teachers).
+Using Python, PyCharm, and TensorFlow, I have set out to gain a mucher more solid understanding of solving problems utilizing Deep 
+Learning. I am currently working on a deep CNN that transcribes pictures of full handwritten paragraphs and feeds the results into
+CopyLeaks API to return an originality score (plagarism checker). I have hopes to connect this with a web interface that allows you to
+upload a picture of handwritten text and get a Plagarism Score as a result (could be useful for teachers).
